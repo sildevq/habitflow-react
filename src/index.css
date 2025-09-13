@@ -1,0 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?display=swap&amp;family=Spline+Sans%3Awght%40400%3B500%3B700");
+@import "tailwindcss";
+
+:root {
+  background-color: #122118;
+}
+
+@theme {
+  --font-noto: "Noto Sans", sans-serif;
+}
