@@ -1,12 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useHabit } from "../hooks/useHabit";
 import { GoPencil } from "react-icons/go";
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import { FaRegTrashAlt } from "react-icons/fa";
 import Calendar from "./Calendar";
 
-function Habit() {
+type HabitProps = {
+  onMarkHabit: (id: string, checked: boolean) => void;
+  onDeleteHabit: (id: string) => void;
+};
+
+function Habit({ onMarkHabit, onDeleteHabit }: HabitProps) {
   const habit = useHabit();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -28,14 +34,21 @@ function Habit() {
               <span className="font-noto font-bold text-white">Edit Habit</span>
             </button>
           </Link>
-          <button className="flex items-center px-7 py-3 bg-[#38e07b] rounded-full cursor-pointer">
+          <button
+            onClick={() => onMarkHabit(habit.id, !habit.checked)}
+            className={`flex items-center px-7 py-3 rounded-full cursor-pointer ${
+              habit.checked
+                ? "bg-[#38e07b] text-black"
+                : "bg-[#264532] text-white"
+            }`}
+          >
             <IoCheckmarkCircleOutline
               size={24}
-              color="000000"
+              color={habit.checked ? "000000" : "ffffff"}
               className="mr-3"
             />
-            <span className="font-noto font-bold text-black">
-              Mark as Complete
+            <span className="font-noto font-bold">
+              {habit.checked ? "Completed" : "Mark as Complete"}
             </span>
           </button>
         </div>
@@ -64,8 +77,13 @@ function Habit() {
               </div>
             </div>
 
-            {/* Кнопка снизу */}
-            <button className="mt-8 flex justify-center items-center w-full py-3 rounded-full border border-[#d6524e] text-[#d6524e] font-noto font-bold cursor-pointer">
+            <button
+              onClick={() => {
+                onDeleteHabit(habit.id);
+                navigate("..");
+              }}
+              className="mt-8 flex justify-center items-center w-full py-3 rounded-full border border-[#d6524e] text-[#d6524e] font-noto font-bold cursor-pointer"
+            >
               <FaRegTrashAlt size={20} color={"d6524e"} className="mr-3" />
               Delete Habit
             </button>

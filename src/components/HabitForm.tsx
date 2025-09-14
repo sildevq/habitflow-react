@@ -76,12 +76,14 @@ type HabitFormProps = {
   onSubmit: (data: HabitData) => void;
   onAddCategory: (category: Category) => void;
   availableCategories: Category[];
+  submitLabel: string;
 } & Partial<HabitData>;
 
 function HabitForm({
   onSubmit,
   onAddCategory,
   availableCategories,
+  submitLabel,
   title = "",
   description = "",
   categories = [],
@@ -179,7 +181,7 @@ function HabitForm({
           type="submit"
           className="bg-[#38e07b] px-5 py-3 font-noto font-semibold text-black rounded-full cursor-pointer"
         >
-          Create Habit
+          {submitLabel}
         </button>
       </div>
     </form>

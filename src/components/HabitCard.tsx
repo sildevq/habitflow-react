@@ -2,6 +2,7 @@ import { HiOutlineFire } from "react-icons/hi";
 import { IoMdCheckmark } from "react-icons/io";
 import { Link } from "react-router-dom";
 import type { SimplifiedHabit } from "../types";
+import defaultHabit from "../assets/defaultHabit.png";
 
 type HabitCardProps = {
   onMarkHabit: (id: string, checked: boolean) => void;
@@ -28,7 +29,11 @@ function HabitCard({ id, title, checked, onMarkHabit }: HabitCardProps) {
             </span>
           </div>
           <div className="ml-auto flex-shrink-0">
-            <img src="/avatar.png" alt="image" className="size-20 rounded-xl" />
+            <img
+              src={defaultHabit}
+              alt="image"
+              className="size-20 rounded-xl"
+            />
           </div>
         </div>
         <div className="mt-5">
@@ -39,7 +44,9 @@ function HabitCard({ id, title, checked, onMarkHabit }: HabitCardProps) {
             onClick={handleMark}
           >
             <IoMdCheckmark size={24} color={checked ? "000000" : "ffffff"} />
-            <span className="ml-3 font-noto font-semibold">Mark Complete</span>
+            <span className="ml-3 font-noto font-semibold">
+              {checked ? "Completed" : "Mark Complete"}
+            </span>
           </button>
         </div>
       </div>
